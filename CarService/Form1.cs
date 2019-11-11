@@ -15,7 +15,6 @@ namespace CarService
         public Form1()
         {
             InitializeComponent();
-            Console.WriteLine("teszt");
         }
     }
 }
