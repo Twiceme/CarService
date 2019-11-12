@@ -7,3 +7,7 @@ D:\Programok\CarService\CarService\obj\Debug\CarService.Properties.Resources.res
 D:\Programok\CarService\CarService\obj\Debug\CarService.csproj.GenerateResource.cache
 D:\Programok\CarService\CarService\obj\Debug\CarService.exe
 D:\Programok\CarService\CarService\obj\Debug\CarService.pdb
+D:\Programok\CarService\CarService\bin\Debug\CsvHelper.dll
+D:\Programok\CarService\CarService\bin\Debug\NLog.dll
+D:\Programok\CarService\CarService\bin\Debug\NLog.xml
+D:\Programok\CarService\CarService\obj\Debug\CarService.csproj.CopyComplete
