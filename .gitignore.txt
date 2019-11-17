@@ -1,1 +1,15 @@
-**/logs
+bin/
+obj/
+Debug/
+Release/
+*.bak
+*.suo
+*.dll
+*.pdb
+packages/
+backup/
+TestResults/
+*.csproj.user
+*.htm
+*.user
+*.ide
