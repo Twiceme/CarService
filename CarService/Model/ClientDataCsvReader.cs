@@ -40,10 +40,10 @@ namespace CarService
                         Client.LicensePlateNumber = csv.GetField<string>("Rendszám");
                         Client.Owner = csv.GetField<string>("Tulaj");
                         Client.CarType = csv.GetField<string>("Típus");
-                        Client.tirePressures.LeftFrontPressure = csv.GetField<double>("Bal első kerék nyomása");
-                        Client.tirePressures.RightFrontPressure = csv.GetField<double>("Jobb első kerék nyomása");
-                        Client.tirePressures.LeftRearPressure = csv.GetField<double>("Bal hátsó kerék nyomása");
-                        Client.tirePressures.RightRearPressure = csv.GetField<double>("Jobb hátsó kerék nyomása");
+                        Client.TirePreasures.LeftFrontPressure = csv.GetField<double>("Bal első kerék nyomása");
+                        Client.TirePreasures.RightFrontPressure = csv.GetField<double>("Jobb első kerék nyomása");
+                        Client.TirePreasures.LeftRearPressure = csv.GetField<double>("Bal hátsó kerék nyomása");
+                        Client.TirePreasures.RightRearPressure = csv.GetField<double>("Jobb hátsó kerék nyomása");
                         
                         ClientsDataList.Add(Client);
                     }

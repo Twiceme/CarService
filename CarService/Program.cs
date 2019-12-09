@@ -26,17 +26,6 @@ namespace CarService
             nfi.NumberDecimalSeparator = ".";      
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
-            //ClientsDataTransporter d = new ClientsDataTransporter();
-            //d.Path = "C:\\Users\\Twice\\Desktop\\Gyakorló Bencének\\clients.csv";
-            //d.UploadCsvToSql();
-            //CentralDataTransporter cd = new CentralDataTransporter();
-            //cd.Path = "C:\\Users\\Twice\\Desktop\\Gyakorló Bencének\\central_data.csv";
-            //cd.UploadCsvToSql();
-            // ClientDataCsvReader a = new ClientDataCsvReader();
-            //CentralDataCsvReader v = new CentralDataCsvReader();
-            //DataRetriever f = new DataRetriever();
-            //f.SetSQLCentralData();
-            //List<CentralData> list = f.SQLCentralDataList;
             DataRetriever s = new DataRetriever();
             s.SetSQLClientList();
             List<ClientsData> clientsDatas = s.SQLClientList;

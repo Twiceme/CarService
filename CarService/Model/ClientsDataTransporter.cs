@@ -25,22 +25,44 @@ namespace CarService
                     command.CommandType = CommandType.StoredProcedure;
                     command.ExecuteNonQuery();
                 }
-                
-                foreach (ClientsData client in csvreader.ClientsDataList)
+            }
+            foreach (ClientsData client in csvreader.ClientsDataList)
+            {
+                SingleCliendToSql(client);
+            }
+        }
+
+        public void SingleCliendToSql(ClientsData client)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLConnection"].ConnectionString))
+            {
+                sqlCon.Open();
+                using (SqlCommand cmd = new SqlCommand("UpdateClientsData", sqlCon))
                 {
-                        using (SqlCommand cmd = new SqlCommand("UpdateClientsData", sqlCon))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@LicensePlateNumber", client.LicensePlateNumber);
-                            cmd.Parameters.AddWithValue("@CarOwner", client.Owner);
-                            cmd.Parameters.AddWithValue("@CarType", client.CarType);
-                            cmd.Parameters.AddWithValue("@LeftFrontPressure", client.tirePressures.LeftFrontPressure);
-                            cmd.Parameters.AddWithValue("@RightFrontPressure", client.tirePressures.RightFrontPressure);
-                            cmd.Parameters.AddWithValue("@LeftRearPressure", client.tirePressures.LeftRearPressure);
-                            cmd.Parameters.AddWithValue("@RightRearPressure", client.tirePressures.RightRearPressure);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@LicensePlateNumber", client.LicensePlateNumber);
+                    cmd.Parameters.AddWithValue("@CarOwner", client.Owner);
+                    cmd.Parameters.AddWithValue("@CarType", client.CarType);
+                    cmd.Parameters.AddWithValue("@LeftFrontPressure", client.TirePreasures.LeftFrontPressure);
+                    cmd.Parameters.AddWithValue("@RightFrontPressure", client.TirePreasures.RightFrontPressure);
+                    cmd.Parameters.AddWithValue("@LeftRearPressure", client.TirePreasures.LeftRearPressure);
+                    cmd.Parameters.AddWithValue("@RightRearPressure", client.TirePreasures.RightRearPressure);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteDataFromSQL(string LicensePlateNumber)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLConnection"].ConnectionString))
+            {
+                sqlCon.Open();
+                using (SqlCommand command = new SqlCommand("DeleteClientsData", sqlCon))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@LicensePlateNumber", LicensePlateNumber);
+                    command.ExecuteNonQuery();
+                }
             }
         }
     }

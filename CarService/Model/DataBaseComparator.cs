@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,31 +32,59 @@ namespace CarService
             foreach(ClientsData client in ClientsDatas)
             {
                 string status = String.Empty;
+                bool Exists = false;
                 for(int i = 0; i< centralDatas.Count; i++)
                 {
                     if(centralDatas[i].LicensePlateNumber == client.LicensePlateNumber)
                     {
+                        Exists = true;
                         if (centralDatas[i].IsStolen)
                         {
                             status = "Riasztás";
                         }
                         else if (centralDatas[i].CarType != client.CarType || centralDatas[i].Owner != client.Owner)
                         {
-                            status = "Gyanús";
+                            if(centralDatas[i].CarType != client.CarType && centralDatas[i].Owner != client.Owner) 
+                                status = "Gyanús (Típus és tulajdonos)";
+                            else if(centralDatas[i].CarType != client.CarType)
+                                status = "Gyanús (Típus)";
+                            else
+                                status = "Gyanús (Tulajdonos)";
                         }
                         else
                         {
                             status = "Tiszta";
                         }
-                    }                   
+                    }
                 }
-                CarChecker car = new CarChecker();
-                car.LicensePLateNumber = client.LicensePlateNumber;
-                car.Owner = client.Owner;
-                car.CarType = client.CarType;
-                car.Status = status;
-                CarCheckers.Add(car);
+                if (!Exists)
+                    status = "No Data was found";
+                client.Status = status;
             }
+        }
+        public void UploadDataToSQL()
+        {
+            CarCheckers.Clear();
+            CheckCars();
+            foreach (ClientsData client in ClientsDatas)
+            {
+                SingleCarcheckerUpload(client);
+            }
+        }
+
+        public void SingleCarcheckerUpload(ClientsData clientsData)
+        {
+                using (SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLConnection"].ConnectionString))
+                {
+                    sqlCon.Open();
+                    using (SqlCommand cmd = new SqlCommand("UpdateClientsDataStatus", sqlCon))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@LicensePlateNumber", SqlDbType.VarChar).Value = clientsData.LicensePlateNumber;
+                        cmd.Parameters.Add("@ComparisonResult", SqlDbType.VarChar).Value = clientsData.Status;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
         }
     }
 }

@@ -11,12 +11,14 @@ namespace CarService
         public string LicensePlateNumber { get; set; }
         public string Owner { get; set; }
         public string CarType { get; set; }
-        public TirePressures tirePressures { get; set; }
+        public TirePressures TirePreasures { get; set; }
         public bool IsActive { get; set; }
+
+        public string Status { get; set; }
 
         public ClientsData()     
         {
-            tirePressures = new TirePressures();
+            TirePreasures = new TirePressures();
         }
 
     }

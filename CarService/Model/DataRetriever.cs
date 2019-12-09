@@ -36,10 +36,11 @@ namespace CarService
                     Client.Owner = reader["Owner"].ToString();
                     Client.CarType = reader["CarType"].ToString();
                     Client.IsActive  = Boolean.Parse(reader["isActive"].ToString());
-                    Client.tirePressures.LeftFrontPressure = Double.Parse(reader["LeftFrontPressure"].ToString());
-                    Client.tirePressures.RightFrontPressure = Double.Parse(reader["RightFrontPressure"].ToString());
-                    Client.tirePressures.LeftRearPressure = Double.Parse(reader["LeftRearPressure"].ToString());
-                    Client.tirePressures.RightRearPressure = Double.Parse(reader["RightRearPressure"].ToString());
+                    Client.Status = reader["Status"].ToString(); ;
+                    Client.TirePreasures.LeftFrontPressure = Double.Parse(reader["LeftFrontPressure"].ToString());
+                    Client.TirePreasures.RightFrontPressure = Double.Parse(reader["RightFrontPressure"].ToString());
+                    Client.TirePreasures.LeftRearPressure = Double.Parse(reader["LeftRearPressure"].ToString());
+                    Client.TirePreasures.RightRearPressure = Double.Parse(reader["RightRearPressure"].ToString());
                     SQLClientList.Add(Client);
                 }
             }
